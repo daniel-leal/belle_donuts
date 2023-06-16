@@ -46,7 +46,7 @@ defmodule BelleDonuts.Catalog do
         {:error, :not_found}
 
       %Product{} = product ->
-        {:ok, product} = {:ok, Repo.preload(product, category: category_query)}
+        {:ok, Repo.preload(product, category: category_query)}
     end
   end
 
