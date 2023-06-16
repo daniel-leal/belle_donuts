@@ -1,0 +1,15 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* This file is for your main application CSS */
+.image-container {
+  padding-top: 15px;
+  width: 200px; /* Set the desired width */
+  height: auto; /* Preserve aspect ratio */
+}
+
+.resized-image {
+  max-width: 100%; /* Resize the image to fit the container */
+  height: auto; /* Preserve aspect ratio */
+}

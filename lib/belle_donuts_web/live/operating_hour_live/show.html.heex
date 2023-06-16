@@ -1,0 +1,28 @@
+<.header>
+  Operating hour <%= @operating_hour.id %>
+  <:subtitle>This is a operating_hour record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/operating_hour/#{@operating_hour}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit operating_hour</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Day"><%= @operating_hour.day %></:item>
+  <:item title="Opening time"><%= @operating_hour.opening_time %></:item>
+  <:item title="Closing time"><%= @operating_hour.closing_time %></:item>
+</.list>
+
+<.back navigate={~p"/operating_hour"}>Back to operating_hour</.back>
+
+<.modal :if={@live_action == :edit} id="operating_hour-modal" show on_cancel={JS.patch(~p"/operating_hour/#{@operating_hour}")}>
+  <.live_component
+    module={BelleDonutsWeb.OperatingHourLive.FormComponent}
+    id={@operating_hour.id}
+    title={@page_title}
+    action={@live_action}
+    operating_hour={@operating_hour}
+    patch={~p"/operating_hour/#{@operating_hour}"}
+  />
+</.modal>

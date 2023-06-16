@@ -1,0 +1,35 @@
+<.header>
+  <%= @product.name %>
+  <:subtitle><%= @product.description %></:subtitle>
+  <:actions>
+    <.link patch={~p"/products/#{@product}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit product</.button>
+    </.link>
+    <.link patch={~p"/products/#{@product}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Aditionals</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<div class="image-container">
+  <img src={@product.image_url} alt="Image" class="resized-image">
+</div>
+
+<.list>
+  <:item title="Category"><%= @product.category %></:item>
+  <:item title="Price"><%= @product.price %></:item>
+  <:item title="Type"><%= @product.type %></:item>
+</.list>
+
+<.back navigate={~p"/products"}>Back to products</.back>
+
+<.modal :if={@live_action == :edit} id="product-modal" show on_cancel={JS.patch(~p"/products/#{@product}")}>
+  <.live_component
+    module={BelleDonutsWeb.ProductLive.FormComponent}
+    id={@product.id}
+    title={@page_title}
+    action={@live_action}
+    product={@product}
+    patch={~p"/products/#{@product}"}
+  />
+</.modal>

@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  postgres-db:
+    image: postgres:14.3
+    ports:
+      - 5432:5432
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: Secret#123
+
+volumes:
+  pgdata:
+    driver: local

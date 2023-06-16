@@ -1,0 +1,37 @@
+<.header>
+  Listing Categories
+  <:actions>
+    <.link patch={~p"/categories/new"}>
+      <.button>New Category</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="categories"
+  rows={@streams.categories}
+>
+  <:col :let={{_id, category}} label="Description"><%= category.description %></:col>
+  <:action :let={{_id, category}}>
+    <.link patch={~p"/categories/#{category}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, category}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: category.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="category-modal" show on_cancel={JS.patch(~p"/categories")}>
+  <.live_component
+    module={BelleDonutsWeb.CategoryLive.FormComponent}
+    id={@category.id || :new}
+    title={@page_title}
+    action={@live_action}
+    category={@category}
+    patch={~p"/categories"}
+  />
+</.modal>
