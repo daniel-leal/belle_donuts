@@ -1,10 +1,10 @@
 defmodule BelleDonutsWeb.UserAuthTest do
   use BelleDonutsWeb.ConnCase, async: true
 
-  alias Phoenix.LiveView
   alias BelleDonuts.Identity
   alias BelleDonutsWeb.UserAuth
   import BelleDonuts.IdentityFixtures
+  alias Phoenix.LiveView
 
   @remember_me_cookie "_belle_donuts_web_user_remember_me"
 

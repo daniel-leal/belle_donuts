@@ -6,7 +6,7 @@ defmodule BelleDonuts.Identity do
   import Ecto.Query, warn: false
   alias BelleDonuts.Repo
 
-  alias BelleDonuts.Identity.{User, UserToken, UserNotifier}
+  alias BelleDonuts.Identity.{User, UserNotifier, UserToken}
 
   ## Database getters
 

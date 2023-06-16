@@ -2,8 +2,8 @@ defmodule Support.Factory do
   use ExMachina.Ecto, repo: BelleDonuts.Repo
 
   alias BelleDonuts.Catalog
-  alias Catalog.Product
   alias Catalog.Category
+  alias Catalog.Product
 
   def product_factory do
     %Product{

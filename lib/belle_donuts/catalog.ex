@@ -6,8 +6,8 @@ defmodule BelleDonuts.Catalog do
   import Ecto.Query, warn: false
   alias BelleDonuts.Repo
 
-  alias BelleDonuts.Catalog.Product
   alias BelleDonuts.Catalog.Category
+  alias BelleDonuts.Catalog.Product
 
   @doc """
   Returns the list of products.
@@ -209,7 +209,7 @@ defmodule BelleDonuts.Catalog do
     Category.changeset(category, attrs)
   end
 
-  defp preload_category_query() do
+  defp preload_category_query do
     from(c in Category, select: c.description, order_by: :description)
   end
 end
