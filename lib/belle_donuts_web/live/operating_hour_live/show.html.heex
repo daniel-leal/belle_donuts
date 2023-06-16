@@ -16,7 +16,12 @@
 
 <.back navigate={~p"/operating_hour"}>Back to operating_hour</.back>
 
-<.modal :if={@live_action == :edit} id="operating_hour-modal" show on_cancel={JS.patch(~p"/operating_hour/#{@operating_hour}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="operating_hour-modal"
+  show
+  on_cancel={JS.patch(~p"/operating_hour/#{@operating_hour}")}
+>
   <.live_component
     module={BelleDonutsWeb.OperatingHourLive.FormComponent}
     id={@operating_hour.id}

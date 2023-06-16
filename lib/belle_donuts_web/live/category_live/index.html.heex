@@ -7,10 +7,7 @@
   </:actions>
 </.header>
 
-<.table
-  id="categories"
-  rows={@streams.categories}
->
+<.table id="categories" rows={@streams.categories}>
   <:col :let={{_id, category}} label="Description"><%= category.description %></:col>
   <:action :let={{_id, category}}>
     <.link patch={~p"/categories/#{category}/edit"}>Edit</.link>
@@ -25,7 +22,12 @@
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="category-modal" show on_cancel={JS.patch(~p"/categories")}>
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="category-modal"
+  show
+  on_cancel={JS.patch(~p"/categories")}
+>
   <.live_component
     module={BelleDonutsWeb.CategoryLive.FormComponent}
     id={@category.id || :new}

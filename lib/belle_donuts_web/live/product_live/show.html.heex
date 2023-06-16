@@ -12,7 +12,7 @@
 </.header>
 
 <div class="image-container">
-  <img src={@product.image_url} alt="Image" class="resized-image">
+  <img src={@product.image_url} alt="Image" class="resized-image" />
 </div>
 
 <.list>
@@ -23,7 +23,12 @@
 
 <.back navigate={~p"/products"}>Back to products</.back>
 
-<.modal :if={@live_action == :edit} id="product-modal" show on_cancel={JS.patch(~p"/products/#{@product}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="product-modal"
+  show
+  on_cancel={JS.patch(~p"/products/#{@product}")}
+>
   <.live_component
     module={BelleDonutsWeb.ProductLive.FormComponent}
     id={@product.id}

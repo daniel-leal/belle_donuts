@@ -13,8 +13,12 @@
   row_click={fn {_id, operating_hour} -> JS.navigate(~p"/operating_hour/#{operating_hour}") end}
 >
   <:col :let={{_id, operating_hour}} label="Day"><%= operating_hour.day %></:col>
-  <:col :let={{_id, operating_hour}} label="Opening time"><%= operating_hour.opening_time %></:col>
-  <:col :let={{_id, operating_hour}} label="Closing time"><%= operating_hour.closing_time %></:col>
+  <:col :let={{_id, operating_hour}} label="Opening time">
+    <%= operating_hour.opening_time %>
+  </:col>
+  <:col :let={{_id, operating_hour}} label="Closing time">
+    <%= operating_hour.closing_time %>
+  </:col>
   <:action :let={{_id, operating_hour}}>
     <div class="sr-only">
       <.link navigate={~p"/operating_hour/#{operating_hour}"}>Show</.link>
@@ -31,7 +35,12 @@
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="operating_hour-modal" show on_cancel={JS.patch(~p"/operating_hour")}>
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="operating_hour-modal"
+  show
+  on_cancel={JS.patch(~p"/operating_hour")}
+>
   <.live_component
     module={BelleDonutsWeb.OperatingHourLive.FormComponent}
     id={@operating_hour.id || :new}
