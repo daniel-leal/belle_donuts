@@ -1,5 +1,8 @@
 # 🍩 Belle Donuts - Administration Panel
 
+[![CI](https://github.com/daniel-leal/belle_donuts/actions/workflows/ci.yml/badge.svg)](https://github.com/daniel-leal/belle_donuts/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 This repository contains the source code of Belle Donuts, an administration panel developed using Elixir and Phoenix. Belle Donuts is a system designed for delivery restaurants that sell donuts. It allows for product management, order tracking, and configuration of opening hours. Additionally, it provides APIs for integration with the digital menu.
 
 ## 📋 Prerequisites
@@ -97,5 +100,3 @@ If you would like to contribute to the development of Belle Donuts, please follo
 7. Open a pull request in this repository, describing your contribution and any relevant details.
 
 Thank you for considering contributing to Belle Donuts! Your help is greatly appreciated. 💜
-
-I hope this meets your requirements! Let me know if there's anything else I can assist you with.
