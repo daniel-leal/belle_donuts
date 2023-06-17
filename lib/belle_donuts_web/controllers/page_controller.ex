@@ -1,9 +1,12 @@
 defmodule BelleDonutsWeb.PageController do
   use BelleDonutsWeb, :controller
 
+  alias BelleDonuts.Catalog
+
   def home(conn, _params) do
-    # The home page is often custom made,
-    # so skip the default app layout.
-    render(conn, :home, layout: false)
+    conn
+    |> assign(:products, Catalog.list_products_home())
+    |> assign(:products_count, Catalog.count_products())
+    |> render(:home, layout: {BelleDonutsWeb.Layouts, :principal})
   end
 end
