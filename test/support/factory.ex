@@ -1,6 +1,7 @@
 defmodule Support.Factory do
   use ExMachina.Ecto, repo: BelleDonuts.Repo
 
+  alias BelleDonuts.Admin.OperatingHour
   alias BelleDonuts.Catalog
   alias Catalog.Category
   alias Catalog.Product
@@ -19,6 +20,21 @@ defmodule Support.Factory do
   def category_factory do
     %Category{
       description: sequence(:description, ["Tradicional", "Vegano"])
+    }
+  end
+
+  def operating_hour_factory do
+    %OperatingHour{
+      day:
+        sequence(:day, [
+          "segunda-feira",
+          "terça-feira",
+          "quarta-feira",
+          "quinta-feira",
+          "sexta-feira"
+        ]),
+      opening_time: "08:00",
+      closing_time: "22:00"
     }
   end
 end
