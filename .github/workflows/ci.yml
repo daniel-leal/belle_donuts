@@ -116,7 +116,7 @@ jobs:
       # Step: Set up Gigalixir CLI
       - name: Set up Gigalixir CLI
         run: |
-          wget -O gigalixir https://gigalixir.com/releases/cli/latest/gigalixir-linux-amd64
+          curl -sSL https://get.gigalixir.com/cli.gz | gunzip > gigalixir
           chmod +x gigalixir
           sudo mv gigalixir /usr/local/bin/
 
@@ -126,4 +126,4 @@ jobs:
 
       # Step: Deploy the app to Gigalixir
       - name: Deploy to Gigalixir
-        run: gigalixir git:remote -a your-gigalixir-app-name
+        run: gigalixir git:remote -a belle-donuts
