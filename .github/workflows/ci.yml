@@ -103,3 +103,27 @@ jobs:
       # Step: Execute the tests.
       - name: Run tests
         run: mix test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    name: Deploy to Gigalixir
+    steps:
+      # Step: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step: Set up Gigalixir CLI
+      - name: Set up Gigalixir CLI
+        run: |
+          wget -O gigalixir https://gigalixir.com/releases/cli/latest/gigalixir-linux-amd64
+          chmod +x gigalixir
+          sudo mv gigalixir /usr/local/bin/
+
+      # Step: Log in to Gigalixir
+      - name: Log in to Gigalixir
+        run: gigalixir login --email ${{ secrets.GIGALIXIR_EMAIL }} --api-key ${{ secrets.GIGALIXIR_API_KEY }}
+
+      # Step: Deploy the app to Gigalixir
+      - name: Deploy to Gigalixir
+        run: gigalixir git:remote -a your-gigalixir-app-name
