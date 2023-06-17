@@ -21,7 +21,7 @@ Follow the steps below to set up the development environment and run Belle Donut
 1. Clone this repository to your local environment:
 
    ```shell
-   git clone https://github.com/your-username/belle_donuts.git
+   git clone https://github.com/daniel-leal/belle_donuts.git
    ```
 
 2. Navigate to the project directory:
