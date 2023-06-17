@@ -105,26 +105,14 @@ jobs:
         run: mix test
 
   deploy:
-    needs: test
+    needs: test # Will only run if the test job succeeds
+    if: github.ref == 'refs/heads/main' # Only run this job if it is on the main branch
+
     runs-on: ubuntu-latest
-    name: Deploy to Gigalixir
+
     steps:
-      # Step: Checkout code
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Step: Set up Gigalixir CLI
-      - name: Set up Gigalixir CLI
-        run: |
-          wget https://github.com/gigalixir/gigalixir/releases/latest/download/gigalixir-linux-amd64.gz -O gigalixir.gz
-          gunzip gigalixir.gz
-          chmod +x gigalixir
-          sudo mv gigalixir /usr/local/bin/
-
-      # Step: Log in to Gigalixir
-      - name: Log in to Gigalixir
-        run: gigalixir login --email ${{ secrets.GIGALIXIR_EMAIL }} --api-key ${{ secrets.GIGALIXIR_API_KEY }}
-
-      # Step: Deploy the app to Gigalixir
-      - name: Deploy to Gigalixir
-        run: gigalixir git:remote -a belle-donuts
+      - uses: actions/checkout@v1
+      - run: sudo pip install gigalixir --ignore-installed six
+      - run: gigalixir login --email ${{ secrets.GIGALIXIR_EMAIL }} --api-key ${{ secrets.GIGALIXIR_API_KEY }}
+      - run: gigalixir git:remote belle-donuts
+      - run: git push -f gigalixir HEAD:refs/heads/master
