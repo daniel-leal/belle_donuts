@@ -6,7 +6,7 @@ defmodule BelleDonutsWeb.Api.ProductController do
   action_fallback(BelleDonutsWeb.FallbackController)
 
   def index(conn, _params) do
-    products = Catalog.list_products()
+    products = Catalog.list_active_products()
     render(conn, :index, products: products)
   end
 

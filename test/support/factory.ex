@@ -11,7 +11,8 @@ defmodule Support.Factory do
       image_url: "https://image.com/img.png",
       name: "Donut",
       price: Decimal.new("25.45"),
-      type: "Single"
+      type: "Single",
+      active: true
     }
   end
 

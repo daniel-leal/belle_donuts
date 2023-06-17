@@ -10,7 +10,7 @@ defmodule BelleDonutsWeb.ProductLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage product records in your database.</:subtitle>
+        <:subtitle>Use este formulário para gerênciar os registros da base de dados</:subtitle>
       </.header>
 
       <.simple_form
@@ -20,26 +20,27 @@ defmodule BelleDonutsWeb.ProductLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:name]} type="text" label="Name" />
-        <.input field={@form[:price]} type="number" label="Price" step="any" />
-        <.input field={@form[:description]} type="textarea" label="Description" />
+        <.input field={@form[:name]} type="text" label="Nome" />
+        <.input field={@form[:price]} type="number" label="Preço" step="any" />
+        <.input field={@form[:description]} type="textarea" label="Descrição" />
         <.input
           field={@form[:category_id]}
           type="select"
-          label="Category"
-          prompt="Select a category..."
+          label="Categoria"
+          prompt="Selecione uma categoria..."
           options={Enum.map(@categories, &{&1.description, &1.id})}
         />
         <.input
           field={@form[:type]}
           type="select"
-          label="Type"
+          label="Tipo"
           options={Helpers.list_product_types()}
         />
-        <.input field={@form[:image_url]} type="text" label="Image url" />
+        <.input field={@form[:image_url]} type="text" label="URL da Imagem" />
+        <.input field={@form[:active]} type="checkbox" label="Ativo" />
 
         <:actions>
-          <.button phx-disable-with="Saving...">Save Product</.button>
+          <.button phx-disable-with="Salvando...">Salvar</.button>
         </:actions>
       </.simple_form>
     </div>
@@ -77,7 +78,7 @@ defmodule BelleDonutsWeb.ProductLive.FormComponent do
 
         {:noreply,
          socket
-         |> put_flash(:info, "Product updated successfully")
+         |> put_flash(:info, "Produto atualizado com sucesso!")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -92,7 +93,7 @@ defmodule BelleDonutsWeb.ProductLive.FormComponent do
 
         {:noreply,
          socket
-         |> put_flash(:info, "Product created successfully")
+         |> put_flash(:info, "Produto incluído com sucesso!")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->

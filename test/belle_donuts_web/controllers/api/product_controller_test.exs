@@ -16,6 +16,15 @@ defmodule BelleDonutsWeb.ProductControllerTest do
       assert json_response(conn, 200)
       assert length(json_response(conn, 200)["data"]) == 4
     end
+
+    test "list all active products", %{conn: conn} do
+      insert_list(2, :product, active: false)
+
+      conn = get(conn, ~p"/api/products")
+
+      assert json_response(conn, 200)
+      assert length(json_response(conn, 200)["data"]) == 4
+    end
   end
 
   describe "show" do
