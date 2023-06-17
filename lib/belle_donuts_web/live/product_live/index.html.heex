@@ -1,8 +1,8 @@
 <.header>
-  Listing Products
+  Listagem de produtos
   <:actions>
     <.link patch={~p"/products/new"}>
-      <.button>New Product</.button>
+      <.button>Incluir</.button>
     </.link>
   </:actions>
 </.header>
@@ -17,16 +17,16 @@
   <:col :let={{_id, product}} label="Type"><%= product.type %></:col>
   <:action :let={{_id, product}}>
     <div class="sr-only">
-      <.link navigate={~p"/products/#{product}"}>Show</.link>
+      <.link navigate={~p"/products/#{product}"}>Exibir</.link>
     </div>
-    <.link patch={~p"/products/#{product}/edit"}>Edit</.link>
+    <.link patch={~p"/products/#{product}/edit"}>Editar</.link>
   </:action>
   <:action :let={{id, product}}>
     <.link
       phx-click={JS.push("delete", value: %{id: product.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
+      data-confirm="Tem certeza?"
     >
-      Delete
+      Deletar
     </.link>
   </:action>
 </.table>

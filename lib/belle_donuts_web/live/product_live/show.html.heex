@@ -3,10 +3,10 @@
   <:subtitle><%= @product.description %></:subtitle>
   <:actions>
     <.link patch={~p"/products/#{@product}/show/edit"} phx-click={JS.push_focus()}>
-      <.button>Edit product</.button>
+      <.button>Editar</.button>
     </.link>
     <.link patch={~p"/products/#{@product}/show/edit"} phx-click={JS.push_focus()}>
-      <.button>Aditionals</.button>
+      <.button>Adicionais</.button>
     </.link>
   </:actions>
 </.header>
@@ -16,12 +16,12 @@
 </div>
 
 <.list>
-  <:item title="Category"><%= @product.category %></:item>
-  <:item title="Price"><%= @product.price %></:item>
-  <:item title="Type"><%= @product.type %></:item>
+  <:item title="Categoria"><%= @product.category %></:item>
+  <:item title="Preço">R$ <%= @product.price %></:item>
+  <:item title="Tipo"><%= @product.type %></:item>
 </.list>
 
-<.back navigate={~p"/products"}>Back to products</.back>
+<.back navigate={~p"/products"}>Voltar para Listagem</.back>
 
 <.modal
   :if={@live_action == :edit}
@@ -35,6 +35,7 @@
     title={@page_title}
     action={@live_action}
     product={@product}
+    categories={@categories}
     patch={~p"/products/#{@product}"}
   />
 </.modal>

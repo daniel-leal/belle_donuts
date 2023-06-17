@@ -10,7 +10,7 @@ defmodule BelleDonuts.Catalog do
   alias BelleDonuts.Catalog.Product
 
   @doc """
-  Returns the list of products.
+  Returns the list products.
 
   ## Examples
 
@@ -24,10 +24,48 @@ defmodule BelleDonuts.Catalog do
     Repo.all(query)
   end
 
-  def count_products do
-    Repo.one(from(p in Product, select: count(p.id)))
+  @doc """
+  Returns the list products.
+
+  ## Examples
+
+      iex> list_products()
+      [%Product{}, ...]
+
+  """
+  def list_active_products do
+    category_query = preload_category_query()
+    query = from(p in Product, where: p.active, preload: [category: ^category_query])
+    Repo.all(query)
   end
 
+  @doc """
+  Retrieves the count of active products from the `Products` table.
+
+  ## Returns
+
+  - If there are active products, returns the count as an integer.
+  - If there are no active products, returns `nil`.
+
+  ## Examples
+
+      iex> count_products()
+      9
+
+  """
+  def count_products do
+    Repo.one(from(p in Product, where: p.active, select: count(p.id)))
+  end
+
+  @doc """
+  Returns the list of five latest products.
+
+  ## Examples
+
+      iex> list_products()
+      [%Product{}, ...]
+
+  """
   def list_products_home do
     category_query = preload_category_query()
 

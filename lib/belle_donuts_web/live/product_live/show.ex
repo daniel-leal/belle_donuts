@@ -5,6 +5,8 @@ defmodule BelleDonutsWeb.ProductLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
+    socket = assign(socket, :categories, Catalog.list_categories())
+
     {:ok, socket}
   end
 
@@ -18,6 +20,6 @@ defmodule BelleDonutsWeb.ProductLive.Show do
      |> assign(:product, product)}
   end
 
-  defp page_title(:show), do: "Show Product"
-  defp page_title(:edit), do: "Edit Product"
+  defp page_title(:show), do: "Exibir"
+  defp page_title(:edit), do: "Editar"
 end

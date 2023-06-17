@@ -12,15 +12,15 @@ msgstr ""
 
 ## From Ecto.Changeset.cast/4
 msgid "can't be blank"
-msgstr ""
+msgstr "Campo obrigatório"
 
 ## From Ecto.Changeset.unique_constraint/3
 msgid "has already been taken"
-msgstr ""
+msgstr "Já foi utilizado"
 
 ## From Ecto.Changeset.put_change/3
 msgid "is invalid"
-msgstr ""
+msgstr "Inválido"
 
 ## From Ecto.Changeset.validate_acceptance/3
 msgid "must be accepted"
@@ -28,7 +28,7 @@ msgstr ""
 
 ## From Ecto.Changeset.validate_format/3
 msgid "has invalid format"
-msgstr ""
+msgstr "Formato inválido"
 
 ## From Ecto.Changeset.validate_subset/3
 msgid "has an invalid entry"
@@ -40,7 +40,7 @@ msgstr ""
 
 ## From Ecto.Changeset.validate_confirmation/3
 msgid "does not match confirmation"
-msgstr ""
+msgstr "Não combina com a confirmação"
 
 ## From Ecto.Changeset.no_assoc_constraint/3
 msgid "is still associated with this entry"
@@ -97,16 +97,16 @@ msgstr[1] ""
 
 ## From Ecto.Changeset.validate_number/3
 msgid "must be less than %{number}"
-msgstr ""
+msgstr "Deve ser menor que %{number}"
 
 msgid "must be greater than %{number}"
-msgstr ""
+msgstr "Deve ser maior que %{number}"
 
 msgid "must be less than or equal to %{number}"
 msgstr ""
 
 msgid "must be greater than or equal to %{number}"
-msgstr ""
+msgstr "Deve ser maior ou igual a %{number}"
 
 msgid "must be equal to %{number}"
-msgstr ""
+msgstr "Deve ser igual a %{number}"

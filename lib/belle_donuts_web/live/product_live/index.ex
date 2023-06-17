@@ -23,19 +23,19 @@ defmodule BelleDonutsWeb.ProductLive.Index do
     {:ok, product} = Catalog.get_product(id)
 
     socket
-    |> assign(:page_title, "Edit Product")
+    |> assign(:page_title, "Editar")
     |> assign(:product, product)
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Product")
+    |> assign(:page_title, "Incluir")
     |> assign(:product, %Product{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Products")
+    |> assign(:page_title, "Listagem de produtos")
     |> assign(:product, nil)
   end
 
