@@ -116,7 +116,8 @@ jobs:
       # Step: Set up Gigalixir CLI
       - name: Set up Gigalixir CLI
         run: |
-          curl -sSL https://get.gigalixir.com/cli.gz | gunzip > gigalixir
+          wget https://github.com/gigalixir/gigalixir/releases/latest/download/gigalixir-linux-amd64.gz -O gigalixir.gz
+          gunzip gigalixir.gz
           chmod +x gigalixir
           sudo mv gigalixir /usr/local/bin/
 
