@@ -24,6 +24,23 @@ defmodule BelleDonuts.Catalog do
     Repo.all(query)
   end
 
+  def count_products do
+    Repo.one(from(p in Product, select: count(p.id)))
+  end
+
+  def list_products_home do
+    category_query = preload_category_query()
+
+    query =
+      from(p in Product,
+        preload: [category: ^category_query],
+        limit: 5,
+        order_by: [desc: :inserted_at]
+      )
+
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single product.
 

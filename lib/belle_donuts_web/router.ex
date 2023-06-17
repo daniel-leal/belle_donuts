@@ -19,8 +19,6 @@ defmodule BelleDonutsWeb.Router do
 
   scope "/", BelleDonutsWeb do
     pipe_through(:browser)
-
-    get("/", PageController, :home)
   end
 
   # Other scopes may use custom stacks.
@@ -49,6 +47,13 @@ defmodule BelleDonutsWeb.Router do
   end
 
   ## Authentication routes
+
+  scope "/", BelleDonutsWeb do
+    pipe_through([:browser, :require_authenticated_user])
+
+    get("/", PageController, :home)
+    delete("/users/log_out", UserSessionController, :delete)
+  end
 
   scope "/", BelleDonutsWeb do
     pipe_through([:browser, :redirect_if_user_is_authenticated])
@@ -87,11 +92,5 @@ defmodule BelleDonutsWeb.Router do
       live("/products/:id", ProductLive.Show, :show)
       live("/products/:id/show/edit", ProductLive.Show, :edit)
     end
-  end
-
-  scope "/", BelleDonutsWeb do
-    pipe_through([:browser])
-
-    delete("/users/log_out", UserSessionController, :delete)
   end
 end
