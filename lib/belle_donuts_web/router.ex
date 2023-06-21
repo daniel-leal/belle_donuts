@@ -28,6 +28,7 @@ defmodule BelleDonutsWeb.Router do
     get("/products", ProductController, :index)
     get("/products/:id", ProductController, :show)
     get("/operating_hours", OperatingHourController, :index)
+    post("/orders", OrderController, :create)
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

@@ -2,17 +2,18 @@ defmodule BelleDonutsWeb.ProductLive.Show do
   use BelleDonutsWeb, :live_view
 
   alias BelleDonuts.Catalog
+  alias Catalog.Queries
 
   @impl true
   def mount(_params, _session, socket) do
-    socket = assign(socket, :categories, Catalog.list_categories())
+    socket = assign(socket, :categories, Queries.list_categories())
 
     {:ok, socket}
   end
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
-    {:ok, product} = Catalog.get_product(id)
+    {:ok, product} = Queries.get_product(id)
 
     {:noreply,
      socket

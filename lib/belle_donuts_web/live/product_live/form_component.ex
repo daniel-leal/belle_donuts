@@ -10,7 +10,9 @@ defmodule BelleDonutsWeb.ProductLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use este formulário para gerênciar os registros da base de dados</:subtitle>
+        <:subtitle>
+          Use este formulário para cadastrar ou editar os produtos que serão listados no cardápio digital
+        </:subtitle>
       </.header>
 
       <.simple_form
@@ -27,7 +29,7 @@ defmodule BelleDonutsWeb.ProductLive.FormComponent do
           field={@form[:category_id]}
           type="select"
           label="Categoria"
-          prompt="Selecione uma categoria..."
+          prompt="Selecione uma categoria"
           options={Enum.map(@categories, &{&1.description, &1.id})}
         />
         <.input

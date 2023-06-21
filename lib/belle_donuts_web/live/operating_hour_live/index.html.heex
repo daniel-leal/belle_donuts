@@ -1,8 +1,8 @@
 <.header>
-  Listing Operating hour
+  Horários de Funcionamento
   <:actions>
     <.link patch={~p"/operating_hour/new"}>
-      <.button>New Operating hour</.button>
+      <.button>Incluir</.button>
     </.link>
   </:actions>
 </.header>
@@ -12,25 +12,25 @@
   rows={@streams.operating_hour_collection}
   row_click={fn {_id, operating_hour} -> JS.navigate(~p"/operating_hour/#{operating_hour}") end}
 >
-  <:col :let={{_id, operating_hour}} label="Day"><%= operating_hour.day %></:col>
-  <:col :let={{_id, operating_hour}} label="Opening time">
+  <:col :let={{_id, operating_hour}} label="Dia"><%= operating_hour.day %></:col>
+  <:col :let={{_id, operating_hour}} label="Hora de Abertura">
     <%= operating_hour.opening_time %>
   </:col>
-  <:col :let={{_id, operating_hour}} label="Closing time">
+  <:col :let={{_id, operating_hour}} label="Hora de Fechamento">
     <%= operating_hour.closing_time %>
   </:col>
   <:action :let={{_id, operating_hour}}>
     <div class="sr-only">
-      <.link navigate={~p"/operating_hour/#{operating_hour}"}>Show</.link>
+      <.link navigate={~p"/operating_hour/#{operating_hour}"}>Exibir</.link>
     </div>
-    <.link patch={~p"/operating_hour/#{operating_hour}/edit"}>Edit</.link>
+    <.link patch={~p"/operating_hour/#{operating_hour}/edit"}>Editar</.link>
   </:action>
   <:action :let={{id, operating_hour}}>
     <.link
       phx-click={JS.push("delete", value: %{id: operating_hour.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
+      data-confirm="Tem certeza?"
     >
-      Delete
+      Deletar
     </.link>
   </:action>
 </.table>

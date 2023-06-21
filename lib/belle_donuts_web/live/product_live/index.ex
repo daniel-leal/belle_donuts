@@ -2,14 +2,14 @@ defmodule BelleDonutsWeb.ProductLive.Index do
   use BelleDonutsWeb, :live_view
 
   alias BelleDonuts.Catalog
-  alias BelleDonuts.Catalog.Product
+  alias Catalog.{Product, Queries}
 
   @impl true
   def mount(_params, _session, socket) do
     socket =
       socket
-      |> assign(:categories, Catalog.list_categories())
-      |> stream(:products, Catalog.list_products())
+      |> assign(:categories, Queries.list_categories())
+      |> stream(:products, Queries.list_products())
 
     {:ok, socket}
   end
@@ -20,7 +20,7 @@ defmodule BelleDonutsWeb.ProductLive.Index do
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
-    {:ok, product} = Catalog.get_product(id)
+    {:ok, product} = Queries.get_product(id)
 
     socket
     |> assign(:page_title, "Editar")
@@ -35,7 +35,7 @@ defmodule BelleDonutsWeb.ProductLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listagem de produtos")
+    |> assign(:page_title, "Produtos")
     |> assign(:product, nil)
   end
 
@@ -46,7 +46,7 @@ defmodule BelleDonutsWeb.ProductLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    with {:ok, product} <- Catalog.get_product(id),
+    with {:ok, product} <- Queries.get_product(id),
          {:ok, _} <- Catalog.delete_product(product) do
       {:noreply, stream_delete(socket, :products, product)}
     end

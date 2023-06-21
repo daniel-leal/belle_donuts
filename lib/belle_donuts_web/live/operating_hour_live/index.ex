@@ -2,7 +2,7 @@ defmodule BelleDonutsWeb.OperatingHourLive.Index do
   use BelleDonutsWeb, :live_view
 
   alias BelleDonuts.Admin
-  alias BelleDonuts.Admin.OperatingHour
+  alias Admin.{OperatingHour, Queries}
   alias BelleDonutsWeb.Helpers
 
   @impl true
@@ -17,7 +17,7 @@ defmodule BelleDonutsWeb.OperatingHourLive.Index do
         :hours,
         Helpers.list_hours()
       )
-      |> stream(:operating_hour_collection, Admin.list_operating_hour())
+      |> stream(:operating_hour_collection, Queries.list_operating_hour())
 
     {:ok, socket}
   end
@@ -29,19 +29,19 @@ defmodule BelleDonutsWeb.OperatingHourLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Operating hour")
-    |> assign(:operating_hour, Admin.get_operating_hour!(id))
+    |> assign(:page_title, "Editar")
+    |> assign(:operating_hour, Queries.get_operating_hour!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Operating hour")
+    |> assign(:page_title, "Incluir")
     |> assign(:operating_hour, %OperatingHour{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Operating hour")
+    |> assign(:page_title, "Horarios de Funcionamento")
     |> assign(:operating_hour, nil)
   end
 
@@ -55,7 +55,7 @@ defmodule BelleDonutsWeb.OperatingHourLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    operating_hour = Admin.get_operating_hour!(id)
+    operating_hour = Queries.get_operating_hour!(id)
     {:ok, _} = Admin.delete_operating_hour(operating_hour)
 
     {:noreply, stream_delete(socket, :operating_hour_collection, operating_hour)}
