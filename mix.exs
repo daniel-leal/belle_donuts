@@ -54,7 +54,8 @@ defmodule BelleDonuts.MixProject do
       {:timex, "~> 3.7"},
       {:calendar, "~> 0.18"},
       {:ex_machina, "~> 2.7.0", only: :test},
-      {:credo, "~> 1.5", only: [:dev, :test]}
+      {:credo, "~> 1.5", only: [:dev, :test]},
+      {:cors_plug, "~> 3.0"}
     ]
   end
 
