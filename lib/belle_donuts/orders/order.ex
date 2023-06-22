@@ -1,42 +1,63 @@
 defmodule BelleDonuts.Orders.Order do
   use Ecto.Schema
+  use EnumType
   import Ecto.Changeset
 
-  @order_status %{
-    waiting: "waiting",
-    preparing: "preparing",
-    outbound_delivery: "outbound_delivery",
-    deliverd: "deliverd",
-    canceled: "canceled"
-  }
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
+  defenum Status do
+    value(Waiting, "waiting")
+    value(Preparing, "preparing")
+    value(OutboundDelivery, "outbound_delivery")
+    value(Delivered, "delivered")
+    value(Canceled, "canceled")
+  end
+
   schema "orders" do
+    field(:status_id, :binary_id)
     field(:complement, :string)
     field(:district, :string)
     field(:number, :string)
     field(:postal_code, :string)
     field(:street, :string)
     field(:total_value, :decimal)
-    field(:status_id, :binary_id)
+    field(:name, :string)
+    field(:email, :string)
+    field(:phone_number, :string)
 
     timestamps()
   end
 
   @doc false
-  def changeset(order \\ %__MODULE__{}, attrs) do
+  def changeset(order \\ %__MODULE__{}, params) do
     order
-    |> cast(attrs, [
+    |> cast(params, [
       :postal_code,
       :street,
       :number,
       :district,
       :complement,
       :total_value,
-      :status_id
+      :status_id,
+      :name,
+      :email,
+      :phone_number
     ])
-    |> validate_required([:postal_code, :street, :number, :district, :complement])
+    |> validate_required([
+      :postal_code,
+      :street,
+      :number,
+      :district,
+      :complement,
+      :status_id,
+      :total_value,
+      :name,
+      :email,
+      :phone_number
+    ])
+    |> validate_format(:email, ~r/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\z/)
+    |> validate_format(:phone_number, ~r/\(\d{2}\) \d{5}-\d{4}/)
   end
 
   @doc """
@@ -56,31 +77,5 @@ defmodule BelleDonuts.Orders.Order do
     order
     |> cast(status, [:status_id])
     |> validate_required([:status_id])
-  end
-
-  def create_changeset(order \\ %__MODULE__{}, params) do
-    order
-    |> cast(params, [
-      :postal_code,
-      :street,
-      :number,
-      :district,
-      :complement,
-      :total_value,
-      :status_id
-    ])
-    |> validate_required([
-      :postal_code,
-      :street,
-      :number,
-      :district,
-      :complement,
-      :status_id,
-      :total_value
-    ])
-  end
-
-  def order_status do
-    @order_status
   end
 end

@@ -19,6 +19,9 @@ defmodule BelleDonutsWeb.Api.OrderJSON do
       number: order.number,
       district: order.district,
       complement: order.complement,
+      name: order.name,
+      email: order.email,
+      phone_number: order.phone_number,
       items: for(item <- items, do: data_items(item))
     }
   end
