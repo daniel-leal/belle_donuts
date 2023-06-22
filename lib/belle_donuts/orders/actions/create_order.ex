@@ -4,6 +4,7 @@ defmodule BelleDonuts.Orders.Actions.CreateOrder do
   alias BelleDonuts.Orders.{Order, OrderItems}
   alias BelleDonuts.Repo
   alias Ecto
+  alias Order.Status
 
   @doc """
   Creates an order with order_items
@@ -56,13 +57,22 @@ defmodule BelleDonuts.Orders.Actions.CreateOrder do
   end
 
   defp build_order_changeset(order_data, total_value) do
-    waiting_status = Order.order_status().waiting |> OrderQueries.get_order_status_by_name()
+    waiting_status = OrderQueries.get_order_status_by_name(Status.Waiting.value())
 
     order_data
-    |> Map.take(["postal_code", "street", "number", "district", "complement"])
+    |> Map.take([
+      "postal_code",
+      "street",
+      "number",
+      "district",
+      "complement",
+      "name",
+      "email",
+      "phone_number"
+    ])
     |> Map.put_new("status_id", waiting_status.id)
     |> Map.put_new("total_value", total_value)
-    |> Order.create_changeset()
+    |> Order.changeset()
   end
 
   defp calculate_total_value(products) when is_nil(products) do

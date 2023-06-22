@@ -6,7 +6,6 @@ defmodule BelleDonuts.Orders.Actions.CreateOrderTest do
   describe "create_order" do
     setup do
       insert(:order_status, status_name: "waiting")
-
       :ok
     end
 
@@ -23,7 +22,10 @@ defmodule BelleDonuts.Orders.Actions.CreateOrderTest do
         "street" => "Tv. Djalma Dutra",
         "number" => "946",
         "district" => "Telégrafo",
-        "complement" => "Apt 1104"
+        "complement" => "Apt 1104",
+        "name" => "Yasmin",
+        "email" => "yasmin@email.com",
+        "phone_number" => "(91) 99986-1498"
       }
 
       response = Orders.create_order(valid_attrs)
@@ -39,7 +41,10 @@ defmodule BelleDonuts.Orders.Actions.CreateOrderTest do
         "street" => "",
         "number" => "",
         "district" => "",
-        "complement" => ""
+        "complement" => "",
+        "name" => "",
+        "email" => "",
+        "phone_number" => ""
       }
 
       response = Orders.create_order(invalid_attrs)
@@ -47,11 +52,43 @@ defmodule BelleDonuts.Orders.Actions.CreateOrderTest do
       assert {:error, %Ecto.Changeset{} = changeset} = response
 
       assert changeset.errors == [
-               postal_code: {"can't be blank", [validation: :required]},
-               street: {"can't be blank", [validation: :required]},
-               number: {"can't be blank", [validation: :required]},
-               district: {"can't be blank", [validation: :required]},
-               complement: {"can't be blank", [validation: :required]}
+               {:postal_code, {"can't be blank", [validation: :required]}},
+               {:street, {"can't be blank", [validation: :required]}},
+               {:number, {"can't be blank", [validation: :required]}},
+               {:district, {"can't be blank", [validation: :required]}},
+               {:complement, {"can't be blank", [validation: :required]}},
+               {:name, {"can't be blank", [validation: :required]}},
+               {:email, {"can't be blank", [validation: :required]}},
+               {:phone_number, {"can't be blank", [validation: :required]}}
+             ]
+    end
+
+    test "create_order raise an error when phone_number and email are invalid" do
+      product1 = insert(:product, name: "Moranguinho", price: Decimal.new("20.00"))
+      product2 = insert(:product, name: "Chocolove", price: Decimal.new("5.00"))
+
+      invalid_phone = %{
+        "products" => [
+          %{"product_id" => product1.id, "quantity" => 3},
+          %{"product_id" => product2.id, "quantity" => 2}
+        ],
+        "postal_code" => "66113010",
+        "street" => "Tv. Djalma Dutra",
+        "number" => "946",
+        "district" => "Telégrafo",
+        "complement" => "Apt 1104",
+        "name" => "Yasmin",
+        "email" => "yasmin",
+        "phone_number" => "91999861498"
+      }
+
+      response = Orders.create_order(invalid_phone)
+
+      assert {:error, %Ecto.Changeset{} = changeset} = response
+
+      assert changeset.errors == [
+               {:phone_number, {"has invalid format", [validation: :format]}},
+               {:email, {"has invalid format", [validation: :format]}}
              ]
     end
 
@@ -61,7 +98,10 @@ defmodule BelleDonuts.Orders.Actions.CreateOrderTest do
         "street" => "Tv. Djalma Dutra",
         "number" => "946",
         "district" => "Telégrafo",
-        "complement" => "Apt 1104"
+        "complement" => "Apt 1104",
+        "name" => "",
+        "email" => "",
+        "phone_number" => ""
       }
 
       response = Orders.create_order(invalid_attrs)
@@ -78,7 +118,10 @@ defmodule BelleDonuts.Orders.Actions.CreateOrderTest do
         "street" => "Tv. Djalma Dutra",
         "number" => "946",
         "district" => "Telégrafo",
-        "complement" => "Apt 1104"
+        "complement" => "Apt 1104",
+        "name" => "Yasmin",
+        "email" => "yasmin@email.com",
+        "phone_number" => "(91) 99986-1498"
       }
 
       response = Orders.create_order(invalid_attrs)

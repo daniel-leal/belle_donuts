@@ -18,7 +18,10 @@ defmodule BelleDonutsWeb.Api.OrderControllerTest do
         "street" => "Tv. Djalma Dutra",
         "number" => "946",
         "district" => "Telégrafo",
-        "complement" => "Apt 1104"
+        "complement" => "Apt 1104",
+        "name" => "Yasmin",
+        "email" => "yasmin@email.com",
+        "phone_number" => "(91) 99986-1498"
       }
 
       expected = %{
@@ -30,7 +33,10 @@ defmodule BelleDonutsWeb.Api.OrderControllerTest do
         "number" => "946",
         "postal_code" => "66113010",
         "street" => "Tv. Djalma Dutra",
-        "total" => "76.35"
+        "total" => "76.35",
+        "name" => "Yasmin",
+        "email" => "yasmin@email.com",
+        "phone_number" => "(91) 99986-1498"
       }
 
       conn = post(conn, ~p"/api/orders", body)
@@ -61,7 +67,10 @@ defmodule BelleDonutsWeb.Api.OrderControllerTest do
         "district" => ["can't be blank"],
         "number" => ["can't be blank"],
         "postal_code" => ["can't be blank"],
-        "street" => ["can't be blank"]
+        "street" => ["can't be blank"],
+        "email" => ["can't be blank"],
+        "name" => ["can't be blank"],
+        "phone_number" => ["can't be blank"]
       }
 
       assert json_response(conn, 422)
