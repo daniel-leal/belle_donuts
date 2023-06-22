@@ -85,6 +85,9 @@ defmodule BelleDonutsWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import BelleDonutsWeb.CoreComponents
+      import BelleDonutsWeb.CurrencyComponent
+      import BelleDonutsWeb.DisplayOrderComponent
+      import BelleDonutsWeb.DisplayDateComponent
       import BelleDonutsWeb.Gettext
 
       # Shortcut for generating JS commands
