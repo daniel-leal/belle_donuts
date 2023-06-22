@@ -2,11 +2,11 @@ defmodule BelleDonutsWeb.CategoryLive.Index do
   use BelleDonutsWeb, :live_view
 
   alias BelleDonuts.Catalog
-  alias BelleDonuts.Catalog.Category
+  alias Catalog.{Category, Queries}
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :categories, Catalog.list_categories())}
+    {:ok, stream(socket, :categories, Queries.list_categories())}
   end
 
   @impl true
@@ -16,19 +16,19 @@ defmodule BelleDonutsWeb.CategoryLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Category")
-    |> assign(:category, Catalog.get_category!(id))
+    |> assign(:page_title, "Editar")
+    |> assign(:category, Queries.get_category!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Category")
+    |> assign(:page_title, "Incluir")
     |> assign(:category, %Category{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Categories")
+    |> assign(:page_title, "Categories")
     |> assign(:category, nil)
   end
 
@@ -39,7 +39,7 @@ defmodule BelleDonutsWeb.CategoryLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    category = Catalog.get_category!(id)
+    category = Queries.get_category!(id)
     {:ok, _} = Catalog.delete_category(category)
 
     {:noreply, stream_delete(socket, :categories, category)}

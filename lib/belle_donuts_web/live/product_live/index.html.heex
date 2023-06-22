@@ -1,5 +1,5 @@
 <.header>
-  Listagem de produtos
+  Produtos
   <:actions>
     <.link patch={~p"/products/new"}>
       <.button>Incluir</.button>
@@ -12,9 +12,10 @@
   rows={@streams.products}
   row_click={fn {_id, product} -> JS.navigate(~p"/products/#{product}") end}
 >
-  <:col :let={{_id, product}} label="Name"><%= product.name %></:col>
-  <:col :let={{_id, product}} label="Price"><%= product.price %></:col>
-  <:col :let={{_id, product}} label="Type"><%= product.type %></:col>
+  <:col :let={{_id, product}} label="Nome"><%= product.name %></:col>
+  <:col :let={{_id, product}} label="Categoria"><%= product.category %></:col>
+  <:col :let={{_id, product}} label="Preço"><%= product.price %></:col>
+  <:col :let={{_id, product}} label="Tipo"><%= product.type %></:col>
   <:action :let={{_id, product}}>
     <div class="sr-only">
       <.link navigate={~p"/products/#{product}"}>Exibir</.link>

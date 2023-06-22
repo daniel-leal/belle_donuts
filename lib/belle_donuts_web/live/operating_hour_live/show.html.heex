@@ -1,20 +1,19 @@
 <.header>
-  Operating hour <%= @operating_hour.id %>
-  <:subtitle>This is a operating_hour record from your database.</:subtitle>
+  Hora de Operação
   <:actions>
     <.link patch={~p"/operating_hour/#{@operating_hour}/show/edit"} phx-click={JS.push_focus()}>
-      <.button>Edit operating_hour</.button>
+      <.button>Editar</.button>
     </.link>
   </:actions>
 </.header>
 
 <.list>
-  <:item title="Day"><%= @operating_hour.day %></:item>
-  <:item title="Opening time"><%= @operating_hour.opening_time %></:item>
-  <:item title="Closing time"><%= @operating_hour.closing_time %></:item>
+  <:item title="Dia"><%= @operating_hour.day %></:item>
+  <:item title="Hora de Abertura"><%= @operating_hour.opening_time %></:item>
+  <:item title="Hora de Fechamento"><%= @operating_hour.closing_time %></:item>
 </.list>
 
-<.back navigate={~p"/operating_hour"}>Back to operating_hour</.back>
+<.back navigate={~p"/operating_hour"}>Voltar</.back>
 
 <.modal
   :if={@live_action == :edit}
@@ -28,6 +27,8 @@
     title={@page_title}
     action={@live_action}
     operating_hour={@operating_hour}
+    hours={@hours}
+    days_of_week={@days_of_week}
     patch={~p"/operating_hour/#{@operating_hour}"}
   />
 </.modal>

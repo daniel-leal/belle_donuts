@@ -3,6 +3,7 @@ defmodule Support.Factory do
 
   alias BelleDonuts.Admin.OperatingHour
   alias BelleDonuts.Catalog
+  alias BelleDonuts.Orders.OrderStatus
   alias Catalog.Category
   alias Catalog.Product
 
@@ -35,6 +36,12 @@ defmodule Support.Factory do
         ]),
       opening_time: "08:00",
       closing_time: "22:00"
+    }
+  end
+
+  def order_status_factory do
+    %OrderStatus{
+      status_name: "waiting"
     }
   end
 end

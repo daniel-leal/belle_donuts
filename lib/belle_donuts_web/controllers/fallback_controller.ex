@@ -20,4 +20,11 @@ defmodule BelleDonutsWeb.FallbackController do
     |> put_view(html: BelleDonutsWeb.ErrorHTML, json: BelleDonutsWeb.Api.ErrorJSON)
     |> render(:"400")
   end
+
+  def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> put_view(json: BelleDonutsWeb.Api.ChangesetJSON)
+    |> render(:error, changeset: changeset)
+  end
 end

@@ -9,7 +9,6 @@ defmodule BelleDonutsWeb.OperatingHourLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage operating_hour records in your database.</:subtitle>
       </.header>
 
       <.simple_form
@@ -22,26 +21,26 @@ defmodule BelleDonutsWeb.OperatingHourLive.FormComponent do
         <.input
           field={@form[:day]}
           type="select"
-          label="Day"
-          prompt="Select a day"
+          label="Dia"
+          prompt="Selecione o dia"
           options={@days_of_week}
         />
         <.input
           field={@form[:opening_time]}
           type="select"
-          label="Opening time"
-          prompt="Select an hour"
+          label="Hora de Abertura"
+          prompt="Selecione a hora"
           options={@hours}
         />
         <.input
           field={@form[:closing_time]}
           type="select"
-          label="Closing time"
-          prompt="Select an hour"
+          label="Hora de Fechamento"
+          prompt="Selecione a hora"
           options={@hours}
         />
         <:actions>
-          <.button phx-disable-with="Saving...">Save Operating hour</.button>
+          <.button phx-disable-with="Salvando...">Salvar</.button>
         </:actions>
       </.simple_form>
     </div>
@@ -73,13 +72,16 @@ defmodule BelleDonutsWeb.OperatingHourLive.FormComponent do
   end
 
   defp save_operating_hour(socket, :edit, operating_hour_params) do
-    case Admin.update_operating_hour(socket.assigns.operating_hour, operating_hour_params) do
+    operating_hour_id = socket.assigns.operating_hour.id
+    operating_hour_params = Map.put(operating_hour_params, "id", operating_hour_id)
+
+    case Admin.update_operating_hour(operating_hour_params) do
       {:ok, operating_hour} ->
         notify_parent({:saved, operating_hour})
 
         {:noreply,
          socket
-         |> put_flash(:info, "Operating hour updated successfully")
+         |> put_flash(:info, "Hora de operação alterada com sucesso!")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -94,7 +96,7 @@ defmodule BelleDonutsWeb.OperatingHourLive.FormComponent do
 
         {:noreply,
          socket
-         |> put_flash(:info, "Operating hour created successfully")
+         |> put_flash(:info, "Hora de operação incluída com sucesso!")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->

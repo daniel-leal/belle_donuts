@@ -9,7 +9,6 @@ defmodule BelleDonutsWeb.CategoryLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage category records in your database.</:subtitle>
       </.header>
 
       <.simple_form
@@ -19,9 +18,9 @@ defmodule BelleDonutsWeb.CategoryLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:description]} type="text" label="Description" />
+        <.input field={@form[:description]} type="text" label="Descrição" />
         <:actions>
-          <.button phx-disable-with="Saving...">Save Category</.button>
+          <.button phx-disable-with="Salvando...">Salvar</.button>
         </:actions>
       </.simple_form>
     </div>
@@ -59,7 +58,7 @@ defmodule BelleDonutsWeb.CategoryLive.FormComponent do
 
         {:noreply,
          socket
-         |> put_flash(:info, "Category updated successfully")
+         |> put_flash(:info, "Categoria atualizada com sucesso!")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -74,7 +73,7 @@ defmodule BelleDonutsWeb.CategoryLive.FormComponent do
 
         {:noreply,
          socket
-         |> put_flash(:info, "Category created successfully")
+         |> put_flash(:info, "Categoria incluída com sucesso!")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
