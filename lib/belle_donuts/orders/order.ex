@@ -3,6 +3,9 @@ defmodule BelleDonuts.Orders.Order do
   use EnumType
   import Ecto.Changeset
 
+  alias BelleDonuts.Orders.OrderItems
+  alias BelleDonuts.Orders.OrderStatus
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
@@ -15,7 +18,6 @@ defmodule BelleDonuts.Orders.Order do
   end
 
   schema "orders" do
-    field(:status_id, :binary_id)
     field(:complement, :string)
     field(:district, :string)
     field(:number, :string)
@@ -25,6 +27,9 @@ defmodule BelleDonuts.Orders.Order do
     field(:name, :string)
     field(:email, :string)
     field(:phone_number, :string)
+
+    has_many :order_items, OrderItems
+    belongs_to :status, OrderStatus
 
     timestamps()
   end

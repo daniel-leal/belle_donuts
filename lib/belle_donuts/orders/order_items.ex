@@ -2,12 +2,16 @@ defmodule BelleDonuts.Orders.OrderItems do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias BelleDonuts.Catalog.Product
+  alias BelleDonuts.Orders.Order
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "order_items" do
     field :quantity, :decimal
-    field :order_id, :binary_id
-    field :product_id, :binary_id
+
+    belongs_to :order, Order
+    belongs_to :product, Product
 
     timestamps()
   end

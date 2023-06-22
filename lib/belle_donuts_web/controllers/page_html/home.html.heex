@@ -37,7 +37,7 @@
         </div>
         <div>
           <p class="mb-2 text-sm font-medium text-gray-600">
-            Quantidade de produtos
+            Produtos no cardápio
           </p>
           <p class="text-lg font-semibold text-gray-700">
             <%= @products_count %>
@@ -67,7 +67,7 @@
             Produtos Vendidos
           </p>
           <p class="text-lg font-semibold text-gray-700">
-            120
+            <%= @products_sold %>
           </p>
         </div>
       </div>
@@ -83,7 +83,7 @@
             Quantidade de pedidos
           </p>
           <p class="text-lg font-semibold text-gray-700">
-            6389
+            <%= @orders_count %>
           </p>
         </div>
       </div>
@@ -109,7 +109,7 @@
             Receita
           </p>
           <p class="text-lg font-semibold text-gray-700">
-            R$ 15000,00
+            <.display_with_currency value={@income} />
           </p>
         </div>
       </div>
@@ -131,23 +131,21 @@
         </div>
         <div class="flow-root">
           <ul role="list" class="divide-y divide-gray-200 light:divide-gray-700">
-            <%= for product <- @products do %>
-              <li class="py-3 sm:py-4">
-                <div class="flex items-center space-x-4">
-                  <div class="flex-1 min-w-0">
-                    <p class="text-sm font-medium text-gray-600 truncate light:text-white">
-                      <%= product.name %>
-                    </p>
-                    <p class="text-sm text-gray-500 truncate light:text-gray-400">
-                      <%= product.category %>
-                    </p>
-                  </div>
-                  <div class="inline-flex items-center text-base text-green-600 light:text-white">
-                    R$ <%= product.price %>
-                  </div>
+            <li :for={product <- @products} class="py-3 sm:py-4">
+              <div class="flex items-center space-x-4">
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-gray-600 truncate light:text-white">
+                    <%= product.name %>
+                  </p>
+                  <p class="text-sm text-gray-500 truncate light:text-gray-400">
+                    <%= product.category %>
+                  </p>
                 </div>
-              </li>
-            <% end %>
+                <div class="inline-flex items-center text-base text-green-600 light:text-white">
+                  <.display_with_currency value={product.price} />
+                </div>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
@@ -166,78 +164,28 @@
         </div>
         <div class="flow-root">
           <ul role="list" class="divide-y divide-gray-200 light:divide-gray-700">
-            <li class="py-3 sm:py-4">
+            <li :for={order <- @orders} class="py-3 sm:py-4">
               <div class="flex items-center space-x-4">
                 <div class="flex-1 min-w-0">
                   <p class="text-sm font-medium text-gray-600 truncate light:text-white">
-                    Order #3054
+                    <.display_order order_id={order.id} />
                   </p>
                   <p class="text-sm text-gray-500 truncate light:text-gray-400">
-                    josejunior@email.com
+                    <a
+                      href="https://api.whatsapp.com/send?phone=+5591992727942&text=Olá, tudo bem?"
+                      target="_blank"
+                      class="hover:underline"
+                    >
+                      <%= order.phone_number %>
+                    </a>
+                    | <%= order.email %>
+                  </p>
+                  <p class="text-sm text-gray-500 truncate light:text-gray-400">
+                    <.display_relative_time date={order.inserted_at} />
                   </p>
                 </div>
                 <div class="inline-flex items-center text-base text-green-600 light:text-white">
-                  R$ 48.00
-                </div>
-              </div>
-            </li>
-            <li class="py-3 sm:py-4">
-              <div class="flex items-center space-x-4">
-                <div class="flex-1 min-w-0">
-                  <p class="text-sm font-medium text-gray-600 truncate light:text-white">
-                    Order #9822
-                  </p>
-                  <p class="text-sm text-gray-500 truncate light:text-gray-400">
-                    josejunior@email.com
-                  </p>
-                </div>
-                <div class="inline-flex items-center text-base text-green-600 light:text-white">
-                  R$ 68.00
-                </div>
-              </div>
-            </li>
-            <li class="py-3 sm:py-4">
-              <div class="flex items-center space-x-4">
-                <div class="flex-1 min-w-0">
-                  <p class="text-sm font-medium text-gray-600 truncate light:text-white">
-                    Order #2752
-                  </p>
-                  <p class="text-sm text-gray-500 truncate light:text-gray-400">
-                    josejunior@email.com
-                  </p>
-                </div>
-                <div class="inline-flex items-center text-base text-green-600 light:text-white">
-                  R$ 28.00
-                </div>
-              </div>
-            </li>
-            <li class="py-3 sm:py-4">
-              <div class="flex items-center space-x-4">
-                <div class="flex-1 min-w-0">
-                  <p class="text-sm font-medium text-gray-600 truncate light:text-white">
-                    Order #3058
-                  </p>
-                  <p class="text-sm text-gray-500 truncate light:text-gray-400">
-                    josejunior@email.com
-                  </p>
-                </div>
-                <div class="inline-flex items-center text-base text-green-600 light:text-white">
-                  R$ 128.00
-                </div>
-              </div>
-            </li>
-            <li class="py-3 sm:py-4">
-              <div class="flex items-center space-x-4">
-                <div class="flex-1 min-w-0">
-                  <p class="text-sm font-medium text-gray-600 truncate light:text-white">
-                    Order #3052
-                  </p>
-                  <p class="text-sm text-gray-500 truncate light:text-gray-400">
-                    josejunior@email.com
-                  </p>
-                </div>
-                <div class="inline-flex items-center text-base text-green-600 light:text-white">
-                  R$ 88.00
+                  <.display_with_currency value={order.total_value} />
                 </div>
               </div>
             </li>
