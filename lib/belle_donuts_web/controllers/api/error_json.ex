@@ -1,8 +1,4 @@
 defmodule BelleDonutsWeb.Api.ErrorJSON do
-  def render("500.json", _assigns) do
-    %{errors: %{detail: "Internal Server Error"}}
-  end
-
   # By default, Phoenix returns the status message from
   # the template name. For example, "404.json" becomes
   # "Not Found".

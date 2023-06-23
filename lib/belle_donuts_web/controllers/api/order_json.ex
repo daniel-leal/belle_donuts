@@ -1,5 +1,6 @@
 defmodule BelleDonutsWeb.Api.OrderJSON do
   alias BelleDonuts.Orders.{Order, OrderItems}
+  alias BelleDonuts.Repo
 
   @doc """
   Renders a single order.
@@ -27,8 +28,10 @@ defmodule BelleDonutsWeb.Api.OrderJSON do
   end
 
   defp data_items(%OrderItems{} = item) do
+    item = Repo.preload(item, :product)
+
     %{
-      product_id: item.product_id,
+      product: item.product.name,
       quantity: item.quantity
     }
   end
