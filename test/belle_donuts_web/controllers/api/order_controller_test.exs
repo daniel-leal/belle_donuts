@@ -28,7 +28,7 @@ defmodule BelleDonutsWeb.Api.OrderControllerTest do
         "complement" => "Apt 1104",
         "district" => "Telégrafo",
         "items" => [
-          %{"product_id" => product.id, "quantity" => "3"}
+          %{"product" => product.name, "quantity" => "3"}
         ],
         "number" => "946",
         "postal_code" => "66113010",
