@@ -16,7 +16,7 @@ defmodule BelleDonutsWeb.Helpers do
   end
 
   def list_hours do
-    Enum.map(1..23, fn hour ->
+    Enum.map(0..23, fn hour ->
       "#{String.pad_leading(Integer.to_string(hour), 2, "0")}:00"
     end)
   end
